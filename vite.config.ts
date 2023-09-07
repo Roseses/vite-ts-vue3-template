@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -40,6 +41,14 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    // 构建cdn自动导入
+    importToCDN({
+      modules: [
+        autoComplete('vue'), // vue2 use autoComplete('vue2')
+        autoComplete('@vueuse/shared'),
+        autoComplete('@vueuse/core'),
+      ],
+    }),
     // 包大小可视化分析
     visualizer({
       open: true, //在默认用户代理中打开生成的文件
