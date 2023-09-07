@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
-    <div>token：{{ token }}</div>
+    <div class="auto">token：{{ token }}</div>
     <div>getter值：{{ newName }}</div>
     <button @click="handleUser">更新用户</button>
     <button @click="handleAge">更新年龄</button>
@@ -41,3 +41,9 @@ const handleToken = () => {
   updateToken('23234');
 };
 </script>
+
+<style scoped lang="scss">
+.auto {
+  color: $test-color;
+}
+</style>
