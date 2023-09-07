@@ -1,11 +1,17 @@
 import axios from 'axios';
+import proxy from '@/config/proxy';
 
+// 当前环境
+const env = import.meta.env.MODE || 'development';
+
+// 如果是mock模式 或 没启用直连代理 就不配置host 会走本地Mock拦截 或 Vite 代理
+const host = env === 'mock' || !proxy.isRequestProxy ? '' : proxy[env].host;
 /*
  * 创建实例
  * 与后端服务通信
  */
 const HttpClient = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: host,
 });
 
 /**

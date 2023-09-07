@@ -3,7 +3,7 @@ import Mock from 'mockjs';
 
 export default [
   {
-    url: '/api/get-purchase-list',
+    url: '/get-purchase-list',
     method: 'get',
     response: () => ({
       code: 0,
@@ -33,7 +33,7 @@ export default [
     }),
   },
   {
-    url: '/api/get-list',
+    url: '/get-list',
     method: 'get',
     response: () => ({
       code: 0,
@@ -57,7 +57,7 @@ export default [
     }),
   },
   {
-    url: '/api/detail-basic',
+    url: '/detail-basic',
     method: 'get',
     response: () => ({
       code: 0,
@@ -75,7 +75,7 @@ export default [
     }),
   },
   {
-    url: '/api/get-card-list',
+    url: '/get-card-list',
     method: 'get',
     response: () => ({
       code: 0,
@@ -108,7 +108,7 @@ export default [
     }),
   },
   {
-    url: '/api/get-project-list',
+    url: '/get-project-list',
     method: 'get',
     response: () => ({
       code: 0,
@@ -134,7 +134,7 @@ export default [
     }),
   },
   {
-    url: '/api/post',
+    url: '/post',
     method: 'post',
     timeout: 2000,
     response: {
