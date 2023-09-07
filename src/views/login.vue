@@ -16,7 +16,7 @@ import { useUserStore } from '@/store/module/user'; //路径别名，引入store
 import { getList } from '@/apis/user';
 
 const queryInfo = () => {
-  getList({ id: 2 });
+  getList({});
 };
 
 const userStore = useUserStore();
