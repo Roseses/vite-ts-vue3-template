@@ -12,3 +12,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 app.use(router).use(store).mount('#app');
+
+// console.log(import.meta.env.VITE_BASE_URL)
