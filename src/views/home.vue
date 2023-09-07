@@ -6,17 +6,17 @@
     <button @click="handleUser">更新用户</button>
     <button @click="handleAge">更新年龄</button>
     <button @click="handleToken">更新token</button>
-    <button @click="goLocation">跳转招行</button>
+    <button @click="queryInfo">发送请求</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/module/user'; //路径别名，引入store
+import { getList } from '@/apis/user';
 
-const goLocation = () => {
-  window.location.href =
-    'https://jytfz.paas.cmbchina.com/pfc-member/merchant/base/register/a2V5PUpZVDAwMDUxX0NfOTEzMjAzMTE3NjUxMzE0OTFDO3NlcT1CQzgyQzQzMEMzRDkwNzhEQkIwNzFBMTMyRjUzRUI5Rg==';
+const queryInfo = () => {
+  getList({ id: 2 });
 };
 
 const userStore = useUserStore();

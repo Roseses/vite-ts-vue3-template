@@ -1,23 +1,22 @@
 <template>
   <div>
     <div>姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
-    <div class="auto">token：{{ token }}</div>
+    <div>token：{{ token }}</div>
     <div>getter值：{{ newName }}</div>
     <button @click="handleUser">更新用户</button>
     <button @click="handleAge">更新年龄</button>
     <button @click="handleToken">更新token</button>
-    <button @click="goLocation">跳转招行</button>
-    <!--    <iframe src="http://localhost:5173/home" width="600" height="400"></iframe>-->
+    <button @click="queryInfo">发送请求</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/module/user'; //路径别名，引入store
+import { getList } from '@/apis/user';
 
-const goLocation = () => {
-  location.href =
-    'https://jytfz.paas.cmbchina.com/pfc-member/merchant/base/register/a2V5PUpZVDAwMDUxX0NfOTEzMjAzMTE3NjUxMzE0OTFDO3NlcT1CQzgyQzQzMEMzRDkwNzhEQkIwNzFBMTMyRjUzRUI5Rg==';
+const queryInfo = () => {
+  getList({ id: 2 });
 };
 
 const userStore = useUserStore();
@@ -41,9 +40,3 @@ const handleToken = () => {
   updateToken('23234');
 };
 </script>
-
-<style scoped lang="scss">
-.auto {
-  color: $test-color;
-}
-</style>
