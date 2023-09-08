@@ -3,7 +3,8 @@ import router from '@/router/index';
 
 NProgress.configure({ showSpinner: false });
 
-router.beforeEach(async (_, _, next) => {
+// eslint-disable-next-line no-unused-vars
+router.beforeEach(async (_, __, next) => {
   NProgress.start();
   next();
 });
