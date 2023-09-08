@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { TOKEN_NAME } from '@/config/global';
+import { TOKEN_NAME, TOKEN_ADMIN } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
 
 const InitUserInfo = {
@@ -8,7 +8,7 @@ const InitUserInfo = {
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+    token: localStorage.getItem(TOKEN_NAME) || TOKEN_ADMIN || '', // 默认token不走权限
     userInfo: InitUserInfo,
   }),
   getters: {
@@ -55,7 +55,7 @@ export const useUserStore = defineStore('user', {
     },
     async getUserInfo() {
       const mockRemoteUserInfo = async (token: string) => {
-        if (token === 'main_token') {
+        if (token === TOKEN_ADMIN) {
           return {
             name: 'td_main',
             roles: ['all'],
