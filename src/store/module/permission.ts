@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
 import router, { asyncRouterList } from '@/router';
 import { store } from '@/store';
+import { WHITE_URL } from '@/config/global';
 
 function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
   const res = [];
@@ -26,7 +27,7 @@ function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<un
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
-    whiteListRouters: ['/login'],
+    whiteListRouters: WHITE_URL,
     routers: [],
     removeRoutes: [],
   }),

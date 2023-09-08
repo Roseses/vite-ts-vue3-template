@@ -7,3 +7,6 @@ export const TOKEN_ADMIN = 'main_token';
 
 // 登录页URL
 export const LOGIN_URL = '/login';
+
+// 页面路径白名单
+export const WHITE_URL = [LOGIN_URL];
