@@ -14,6 +14,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.9
     version: 1.11.9
+  echarts:
+    specifier: 5.1.2
+    version: 5.1.2
   element-plus:
     specifier: ^2.3.12
     version: 2.3.12(vue@3.3.4)
@@ -1791,6 +1794,13 @@ packages:
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
+
+  /echarts@5.1.2:
+    resolution: {integrity: sha512-okUhO4sw22vwZp+rTPNjd/bvTdpug4K4sHNHyrV8NdAncIX9/AarlolFqtJCAYKGFYhUBNjIWu1EznFrSWTFxg==}
+    dependencies:
+      tslib: 2.0.3
+      zrender: 5.1.1
+    dev: false
 
   /ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -3712,6 +3722,10 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /tslib@2.0.3:
+    resolution: {integrity: sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==}
+    dev: false
+
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
@@ -4131,3 +4145,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zrender@5.1.1:
+    resolution: {integrity: sha512-oeWlmUZPQdS9f5hK4pV21tHPqA3wgQ7CkKkw7l0CCBgWlJ/FP+lRgLFtUBW6yam4JX8y9CdHJo1o587VVrbcoQ==}
+    dependencies:
+      tslib: 2.0.3
+    dev: false
