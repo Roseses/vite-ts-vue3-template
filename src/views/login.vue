@@ -8,6 +8,7 @@
     <button @click="handleToken">更新token</button>
     <button @click="queryInfo">发送请求</button>
     <button @click="goRoute">路由跳转home</button>
+    <button @click="copy">复制</button>
   </div>
 </template>
 
@@ -16,6 +17,15 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/module/user'; //路径别名，引入store
 import { getList } from '@/apis/user';
 import router from '@/router/index';
+import { handleCopy } from '@/utils/clipboard';
+
+const copy = async () => {
+  try {
+    await handleCopy('我来了');
+  } catch (e) {
+    /* empty */
+  }
+};
 
 const queryInfo = () => {
   getList({});
