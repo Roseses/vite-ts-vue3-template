@@ -6,7 +6,7 @@
   </router-view>
 </template>
 
-<style>
+<style scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.2s ease;
@@ -16,4 +16,13 @@
 .fade-leave-active {
   opacity: 0;
 }
+</style>
+
+<style>
+/*
+  调整加载条颜色
+*/
+/*#nprogress .bar {*/
+/*  background: pink !important;*/
+/*}*/
 </style>

@@ -7,6 +7,7 @@
     <button @click="handleAge">更新年龄</button>
     <button @click="handleToken">更新token</button>
     <button @click="queryInfo">发送请求</button>
+    <button @click="goRoute">路由跳转home</button>
   </div>
 </template>
 
@@ -14,9 +15,14 @@
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/module/user'; //路径别名，引入store
 import { getList } from '@/apis/user';
+import router from '@/router/index';
 
 const queryInfo = () => {
   getList({});
+};
+
+const goRoute = () => {
+  router.push('/home');
 };
 
 const userStore = useUserStore();
