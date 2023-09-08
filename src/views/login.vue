@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Logo></Logo>
     <div>姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
     <div>token：{{ token }}</div>
     <div>getter值：{{ newName }}</div>
@@ -18,6 +19,7 @@ import { useUserStore } from '@/store/module/user'; //路径别名，引入store
 import { getList } from '@/apis/user';
 import router from '@/router/index';
 import { handleCopy } from '@/utils/clipboard';
+import Logo from '@/assets/vue.svg';
 
 const copy = async () => {
   try {

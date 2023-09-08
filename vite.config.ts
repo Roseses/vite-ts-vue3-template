@@ -8,6 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import';
 import { viteMockServe } from 'vite-plugin-mock';
+import svgLoader from 'vite-svg-loader';
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -44,6 +45,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     plugins: [
       vue(),
+      // svg
+      svgLoader(),
       // mockjs
       viteMockServe({
         mockPath: 'mock',
