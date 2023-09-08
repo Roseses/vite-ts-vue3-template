@@ -8,7 +8,7 @@
     <button @click="handleAge">更新年龄</button>
     <button @click="handleToken">更新token</button>
     <button @click="queryInfo">发送请求</button>
-    <button @click="goRoute">路由跳转home</button>
+    <t-button theme="primary" @click="goRoute"> 跳转home </t-button>
     <button @click="copy">复制</button>
   </div>
 </template>
