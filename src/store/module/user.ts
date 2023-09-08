@@ -1,34 +1,95 @@
 import { defineStore } from 'pinia';
+import { TOKEN_NAME } from '@/config/global';
+import { store, usePermissionStore } from '@/store';
 
-// defineStore 第一个参数是id，必需且值唯一
+const InitUserInfo = {
+  roles: [],
+};
+
 export const useUserStore = defineStore('user', {
-  //state返回一个函数，防止作用域污染
-  state: () => {
-    return {
-      userInfo: {
-        name: 'zhangsan',
-        age: 23,
-      },
-      token: 'S1',
-    };
-  },
+  state: () => ({
+    token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+    userInfo: InitUserInfo,
+  }),
   getters: {
-    newName: (state) => state.userInfo.name + 'vip',
+    roles: (state) => {
+      return state.userInfo?.roles;
+    },
   },
   actions: {
-    //更新整个对象
-    updateUserInfo(userInfo: { name: string; age: number }) {
-      this.userInfo = userInfo;
+    async login(userInfo: Record<string, unknown>) {
+      const mockLogin = async (userInfo: Record<string, unknown>) => {
+        // 登录请求流程
+        // eslint-disable-next-line
+        console.log(userInfo);
+        // const { account, password } = userInfo;
+        // if (account !== 'td') {
+        //   return {
+        //     code: 401,
+        //     message: '账号不存在',
+        //   };
+        // }
+        // if (['main_', 'dev_'].indexOf(password) === -1) {
+        //   return {
+        //     code: 401,
+        //     message: '密码错误',
+        //   };
+        // }
+        // const token = {
+        //   main_: 'main_token',
+        //   dev_: 'dev_token',
+        // }[password];
+        return {
+          code: 200,
+          message: '登陆成功',
+          data: 'main_token',
+        };
+      };
+
+      const res = await mockLogin(userInfo);
+      if (res.code === 200) {
+        this.token = res.data;
+      } else {
+        throw res;
+      }
     },
-    //更新对象中某个属性
-    updateAge(age: number) {
-      this.userInfo.age = age;
+    async getUserInfo() {
+      const mockRemoteUserInfo = async (token: string) => {
+        if (token === 'main_token') {
+          return {
+            name: 'td_main',
+            roles: ['all'],
+          };
+        }
+        return {
+          name: 'td_dev',
+          roles: ['UserIndex', 'DashboardBase', 'login'],
+        };
+      };
+
+      const res = await mockRemoteUserInfo(this.token);
+
+      this.userInfo = res;
     },
-    //更新基础数据类型
-    updateToken(token: string) {
-      this.token = token;
+    async logout() {
+      localStorage.removeItem(TOKEN_NAME);
+      this.token = '';
+      this.userInfo = InitUserInfo;
+    },
+    async removeToken() {
+      this.token = '';
     },
   },
-  // 开始数据持久化
-  persist: true,
+  persist: {
+    afterRestore: (ctx) => {
+      if (ctx.store.roles && ctx.store.roles.length > 0) {
+        const permissionStore = usePermissionStore();
+        permissionStore.initRoutes(ctx.store.roles);
+      }
+    },
+  },
 });
+
+export function getUserStore() {
+  return useUserStore(store);
+}

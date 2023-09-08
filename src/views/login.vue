@@ -1,60 +1,19 @@
 <template>
   <div>
-    <Logo></Logo>
-    <div>姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
-    <div>token：{{ token }}</div>
-    <div>getter值：{{ newName }}</div>
-    <button @click="handleUser">更新用户</button>
-    <button @click="handleAge">更新年龄</button>
-    <button @click="handleToken">更新token</button>
     <button @click="queryInfo">发送请求</button>
-    <t-button theme="primary" @click="goRoute"> 跳转home </t-button>
-    <button @click="copy">复制</button>
+    <button @click="goRoute">路由跳转home</button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useUserStore } from '@/store/module/user'; //路径别名，引入store
 import { getList } from '@/apis/user';
 import router from '@/router/index';
-import { handleCopy } from '@/utils/clipboard';
-import Logo from '@/assets/vue.svg';
-
-const copy = async () => {
-  try {
-    await handleCopy('我来了');
-  } catch (e) {
-    /* empty */
-  }
-};
-
-const queryInfo = () => {
-  getList({});
-};
 
 const goRoute = () => {
   router.push('/home');
 };
 
-const userStore = useUserStore();
-
-//storeToRefs 会跳过所有的 action 属性
-const { userInfo, token, newName } = storeToRefs(userStore);
-
-//action 属性直接解构
-const { updateUserInfo, updateAge, updateToken } = userStore;
-
-const handleUser = () => {
-  updateUserInfo({ name: 'lisi', age: 24 });
-};
-
-const handleAge = () => {
-  //userInfo是一个ref响应式引用，需通过.value取值
-  updateAge(userInfo.value.age + 1);
-};
-
-const handleToken = () => {
-  updateToken('23234');
+const queryInfo = () => {
+  getList({});
 };
 </script>
