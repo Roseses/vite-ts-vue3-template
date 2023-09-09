@@ -1,28 +1,20 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <Transition name="fade" mode="out-in">
-      <component :is="Component" />
-    </Transition>
-  </router-view>
+  <router-view :class="[mode]" />
 </template>
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useSettingStore } from '@/store';
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.2s ease;
+const store = useSettingStore();
+
+const mode = computed(() => {
+  return store.displayMode;
+});
+</script>
+<style lang="less" scoped>
+@import '@/style/variables.less';
+
+#nprogress .bar {
+  background: var(--td-brand-color) !important;
 }
-
-.fade-enter-from,
-.fade-leave-active {
-  opacity: 0;
-}
-</style>
-
-<style>
-/*
-  调整加载条颜色
-*/
-/*#nprogress .bar {*/
-/*  background: pink !important;*/
-/*}*/
 </style>

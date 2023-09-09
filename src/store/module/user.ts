@@ -8,7 +8,7 @@ const InitUserInfo = {
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    token: localStorage.getItem(TOKEN_NAME) || TOKEN_ADMIN || '', // 默认token不走权限
+    token: localStorage.getItem(TOKEN_NAME) || (import.meta.env.MODE === 'mock' ? TOKEN_ADMIN : '') || '', // mock环境默认token不走权限
     userInfo: InitUserInfo,
   }),
   getters: {
