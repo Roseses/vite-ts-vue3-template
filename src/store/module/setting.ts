@@ -1,8 +1,16 @@
 import { defineStore } from 'pinia';
 import keys from 'lodash/keys';
-import { COLOR_TOKEN, LIGHT_CHART_COLORS, DARK_CHART_COLORS, TColorSeries } from '@/config/color';
+import {
+  COLOR_TOKEN,
+  LIGHT_CHART_COLORS,
+  DARK_CHART_COLORS,
+  TColorSeries,
+  generateColorMap,
+  insertThemeStylesheet,
+} from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
+import { Color } from 'tvision-color';
 
 const state = {
   ...STYLE_CONFIG,
@@ -48,7 +56,16 @@ export const useSettingStore = defineStore('setting', {
 
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
-    changeBrandTheme(brandTheme: string) {
+    changeBrandTheme(brandThemeContent: string) {
+      const brandTheme = brandThemeContent === 'dynamic' ? '#0052D9' : brandThemeContent;
+      const newPalette = Color.getPaletteByGradation({
+        colors: [brandTheme],
+        step: 10,
+      })[0];
+      const mode = this.displayMode;
+      const colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark');
+      this.addColor({ [brandTheme]: colorMap });
+      insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
       // eslint-disable-next-line
       console.log(brandTheme, '-----------主题色');
       document.documentElement.setAttribute('theme-color', brandTheme);

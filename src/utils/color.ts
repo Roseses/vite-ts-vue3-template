@@ -16,7 +16,7 @@ export function getColorFromTheme(theme: string): Array<string> {
   const isDarkMode = mode === 'dark';
   let themeColorList;
   const themeColor = getBrandColor(theme, colorList);
-
+  console.log(themeColor, '---------------');
   if (!/^#[A-F\d]{6}$/i.test(theme)) {
     theme = themeColor?.['--td-brand-color'] || '#0052D9';
     const themIdx = defaultLightColor.indexOf(theme.toLocaleLowerCase());
