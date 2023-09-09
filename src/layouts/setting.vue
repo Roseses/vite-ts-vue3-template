@@ -112,11 +112,12 @@ import STYLE_CONFIG from '@/config/style';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+import { COLOR_OPTIONS_LIST } from '@/config/global';
 
 const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
+const COLOR_OPTIONS: any = COLOR_OPTIONS_LIST;
 const MODE_OPTIONS = [
   { type: 'light', text: '明亮' },
   { type: 'dark', text: '暗黑' },

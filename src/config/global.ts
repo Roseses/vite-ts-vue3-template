@@ -10,3 +10,16 @@ export const LOGIN_URL = '/login';
 
 // 页面路径白名单
 export const WHITE_URL = [LOGIN_URL];
+
+// 布局设置的主题色选择
+export const COLOR_OPTIONS_LIST: string[] = [
+  'default',
+  'cyan',
+  'green',
+  'yellow',
+  'orange',
+  'red',
+  'pink',
+  'purple',
+  'dynamic',
+];

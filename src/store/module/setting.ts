@@ -11,6 +11,7 @@ import {
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
 import { Color } from 'tvision-color';
+import { COLOR_OPTIONS_LIST } from '@/config/global';
 
 const state = {
   ...STYLE_CONFIG,
@@ -57,18 +58,31 @@ export const useSettingStore = defineStore('setting', {
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
     changeBrandTheme(brandThemeContent: string) {
-      const brandTheme = brandThemeContent === 'dynamic' ? '#0052D9' : brandThemeContent;
-      const newPalette = Color.getPaletteByGradation({
-        colors: [brandTheme],
-        step: 10,
-      })[0];
-      const mode = this.displayMode;
-      const colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark');
-      this.addColor({ [brandTheme]: colorMap });
-      insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
-      // eslint-disable-next-line
-      console.log(brandTheme, '-----------主题色');
-      document.documentElement.setAttribute('theme-color', brandTheme);
+      try {
+        if (COLOR_OPTIONS_LIST.includes(brandThemeContent) && brandThemeContent !== 'dynamic') {
+          document.documentElement.setAttribute('theme-color', brandThemeContent);
+          return;
+        }
+        const brandTheme = brandThemeContent === 'dynamic' ? '#0052D9' : brandThemeContent;
+        const newPalette = Color.getPaletteByGradation({
+          colors: [brandTheme],
+          step: 10,
+        })[0];
+        const mode = this.displayMode;
+        const colorKey = `${brandTheme}`;
+        let colorMap = this.colorList[colorKey];
+        if (colorMap === undefined) {
+          colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark');
+          // this.addColor({ [colorKey]: colorMap });
+          this.colorList[colorKey] = colorMap;
+        }
+        insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
+        // eslint-disable-next-line
+        console.log(brandTheme, '-----------主题色');
+        document.documentElement.setAttribute('theme-color', brandTheme);
+      } catch (e) {
+        console.log(e, '----------主题色报错');
+      }
     },
     addColor(payload: TColorSeries) {
       this.colorList = { ...this.colorList, ...payload };

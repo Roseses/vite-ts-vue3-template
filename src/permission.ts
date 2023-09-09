@@ -9,6 +9,8 @@ NProgress.configure({ showSpinner: false });
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
 
+  // eslint-disable-next-line
+  console.log(to, from, '------------路由变更');
   const userStore = getUserStore();
   const permissionStore = getPermissionStore();
   const { whiteListRouters } = permissionStore;
