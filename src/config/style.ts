@@ -34,4 +34,21 @@ export const HeaderConfig = {
   showSearch: false,
   // 展示信息框
   showNotice: true,
+  // 代码仓库 与 帮助文档
+  gitAndDocuList: [
+    {
+      show: true,
+      content: '代码仓库',
+      icon: 'logo-github',
+      onClick: () => {},
+    },
+    {
+      show: true,
+      content: '帮助文档',
+      icon: 'help-circle',
+      onClick: () => {},
+    },
+  ],
+  // 布局配置的按钮在什么环境下不展示
+  noConfigSetting: ['production'],
 };

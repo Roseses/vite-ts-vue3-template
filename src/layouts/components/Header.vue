@@ -21,16 +21,14 @@
           <!-- 全局通知 -->
           <notice v-if="showNotice" />
 
-          <t-tooltip placement="bottom" content="代码仓库">
-            <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
-              <t-icon name="logo-github" />
-            </t-button>
-          </t-tooltip>
-          <t-tooltip placement="bottom" content="帮助文档">
-            <t-button theme="default" shape="square" variant="text" @click="navToHelper">
-              <t-icon name="help-circle" />
-            </t-button>
-          </t-tooltip>
+          <template v-for="(it, index) in gitAndDocuList">
+            <t-tooltip v-if="it.show" :key="index + 'tooltip'" placement="bottom" :content="it.content">
+              <t-button theme="default" shape="square" variant="text" @click="it.onClick">
+                <t-icon :name="it.icon" />
+              </t-button>
+            </t-tooltip>
+          </template>
+
           <t-dropdown :min-column-width="135" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
@@ -52,7 +50,7 @@
               </div>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" content="系统设置">
+          <t-tooltip v-if="showSetting" placement="bottom" content="系统设置">
             <t-button theme="default" shape="square" variant="text">
               <t-icon name="setting" @click="toggleSettingPanel" />
             </t-button>
@@ -75,7 +73,8 @@ import Notice from './Notice.vue';
 import Search from './Search.vue';
 import MenuContent from './MenuContent.vue';
 
-const { logo, logoClickFnc, showSearch, showNotice } = HeaderConfig;
+const { logo, logoClickFnc, showSearch, showNotice, gitAndDocuList, noConfigSetting } = HeaderConfig;
+const showSetting = !noConfigSetting.includes(import.meta.env.MODE);
 const props = defineProps({
   theme: {
     type: String,
@@ -146,13 +145,13 @@ const handleLogout = () => {
   router.push(`/login?redirect=${router.currentRoute.value.fullPath}`);
 };
 
-const navToGitHub = () => {
-  window.open('https://github.com/tencent/tdesign-vue-next-starter');
-};
+// const navToGitHub = () => {
+//   window.open('https://github.com/tencent/tdesign-vue-next-starter');
+// };
 
-const navToHelper = () => {
-  window.open('http://tdesign.tencent.com/starter/docs/get-started');
-};
+// const navToHelper = () => {
+//   window.open('http://tdesign.tencent.com/starter/docs/get-started');
+// };
 </script>
 <style lang="less" scoped>
 @import '@/style/variables.less';
