@@ -2,8 +2,8 @@
   <div :class="layoutCls">
     <t-head-menu :class="menuCls" :theme="theme" expand-type="popup" :value="active">
       <template #logo>
-        <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
-          <logo-full class="t-logo" />
+        <span v-if="showLogo" class="header-logo-container" @click="logoClickFnc('/dashboard/base')">
+          <logo class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
@@ -16,10 +16,10 @@
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
-          <search v-if="layout !== 'side'" :layout="layout" />
+          <search v-if="layout !== 'side' && showSearch" :layout="layout" />
 
           <!-- 全局通知 -->
-          <notice />
+          <notice v-if="showNotice" />
 
           <t-tooltip placement="bottom" content="代码仓库">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
@@ -69,13 +69,13 @@ import { useRouter } from 'vue-router';
 import { useSettingStore } from '@/store';
 import { getActive } from '@/router';
 import { prefix } from '@/config/global';
-import LogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/types/interface';
-
+import { HeaderConfig } from '@/config/style';
 import Notice from './Notice.vue';
 import Search from './Search.vue';
 import MenuContent from './MenuContent.vue';
 
+const { logo, logoClickFnc, showSearch, showNotice } = HeaderConfig;
 const props = defineProps({
   theme: {
     type: String,
