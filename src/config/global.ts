@@ -23,3 +23,6 @@ export const COLOR_OPTIONS_LIST: string[] = [
   'purple',
   'dynamic',
 ];
+
+// 主题色容错下的颜色
+export const COLOR_INIT = '#0052D9';

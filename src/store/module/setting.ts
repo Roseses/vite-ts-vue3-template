@@ -11,7 +11,7 @@ import {
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
 import { Color } from 'tvision-color';
-import { COLOR_OPTIONS_LIST } from '@/config/global';
+import { COLOR_OPTIONS_LIST, COLOR_INIT } from '@/config/global';
 
 const state = {
   ...STYLE_CONFIG,
@@ -63,7 +63,7 @@ export const useSettingStore = defineStore('setting', {
           document.documentElement.setAttribute('theme-color', brandThemeContent);
           return;
         }
-        const brandTheme = brandThemeContent === 'dynamic' ? '#0052D9' : brandThemeContent;
+        const brandTheme = brandThemeContent === 'dynamic' ? COLOR_INIT : brandThemeContent;
         const newPalette = Color.getPaletteByGradation({
           colors: [brandTheme],
           step: 10,

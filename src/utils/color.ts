@@ -2,6 +2,7 @@ import { Color } from 'tvision-color';
 import * as echarts from 'echarts/core';
 import { getBrandColor, defaultLightColor, defaultDarkColor } from '@/config/color';
 import { getSettingStore } from '@/store';
+import { COLOR_INIT } from '@/config/global';
 
 /**
  * 依据主题类型获取颜色
@@ -18,7 +19,7 @@ export function getColorFromTheme(theme: string): Array<string> {
   const themeColor = getBrandColor(theme, colorList);
   console.log(themeColor, '---------------');
   if (!/^#[A-F\d]{6}$/i.test(theme)) {
-    theme = themeColor?.['--td-brand-color'] || '#0052D9';
+    theme = themeColor?.['--td-brand-color'] || COLOR_INIT;
     const themIdx = defaultLightColor.indexOf(theme.toLocaleLowerCase());
     const defaultGradients = !isDarkMode ? defaultLightColor : defaultDarkColor;
 
